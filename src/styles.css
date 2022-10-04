@@ -2,6 +2,9 @@
   --peg-size: 40px;
   --text-color: #0e0d45;
   --border-color: rgba(200, 200, 200, 1);
+  --hint-size: 14px;
+  --hint-border-size: 3px;
+  --hint-translation: calc((var(--hint-size) - var(--hint-border-size)) / -2);
 }
 
 .App {
@@ -102,6 +105,11 @@
   line-height: 100%;
 }
 
+.Row .check.hovering:hover {
+  color: rgb(0, 160, 0);
+  border: 3px solid rgba(0, 160, 0, 0.7);
+}
+
 .Row .check.used {
   color: rgb(0, 110, 0);
   border: 3px solid rgba(0, 110, 0, 0.7);
@@ -115,41 +123,42 @@
 }
 
 .Hint div {
-  height: 14px;
-  width: 14px;
-  border: 3px solid var(--border-color);
+  height: var(--hint-size);
+  width: var(--hint-size);
+  border: var(--hint-border-size) solid var(--border-color);
   border-radius: 50%;
 }
 
 .Hint .black {
-  border: 3px solid black;
+  border: var(--hint-border-size) solid black;
   background-color: black;
 }
 
 .Hint .white {
-  border: 3px solid black;
+  border: var(--hint-border-size) solid black;
 }
 
-/* .Hint .wrong {
-  border: 3px solid black;
-  background-color: red;
-} */
 .Hint .wrong {
-  border: 3px solid black;
-  background: linear-gradient(
-      to top left,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) calc(50% - 3px),
-      rgba(0, 0, 0, 1) 50%,
-      rgba(0, 0, 0, 0) calc(50% + 3px),
-      rgba(0, 0, 0, 0) 100%
-    ),
-    linear-gradient(
-      to top right,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) calc(50% - 3px),
-      rgba(0, 0, 0, 1) 50%,
-      rgba(0, 0, 0, 0) calc(50% + 3px),
-      rgba(0, 0, 0, 0) 100%
-    );
+  position: relative;
+  border: solid var(--hint-border-size) black;
+  border-radius: 50%;
+}
+
+.Hint .wrong::before,
+.Hint .wrong::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-right: var(--hint-border-size) solid black;
+}
+
+.Hint .wrong::before {
+  transform: rotate(45deg) translate(var(--hint-translation), 0);
+}
+
+.Hint .wrong::after {
+  transform: rotate(-45deg) translate(var(--hint-translation), 0);
 }

@@ -75,9 +75,9 @@ export default function Row(props) {
           className={props.isActive[props.id] ? "peg active" : "peg"}
           onClick={() => choosePeg(index)}
           style={
-            pegs[index] === null
-              ? { color: "unset" }
-              : { backgroundColor: colors[pegs[index]] }
+            peg === null
+              ? null
+              : { backgroundColor: colors[peg] }
           }
         ></div>
       ))}
@@ -85,7 +85,9 @@ export default function Row(props) {
         className={
           props.isActive.findIndex((elem) => elem === true) > props.id
             ? "check used"
-            : "check"
+            : !pegs.includes(null) 
+              ? "check hovering :hover" 
+              : "check"
         }
         onClick={checkGuess}
       >

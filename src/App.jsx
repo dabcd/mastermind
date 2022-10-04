@@ -4,7 +4,6 @@ import Row from "./Row";
 import Pegs from "./Pegs";
 import { nanoid } from "nanoid";
 import { INT_CHOICES } from "./prefs";
-import "./styles.css";
 
 export default function App() {
   const [game, setGame] = React.useState({
@@ -55,12 +54,12 @@ export default function App() {
     setGame((prev) => ({ ...prev, isWon: true }));
   }
 
-  const newGame = React.useCallback(() => {
+  const newGame = () => {
     // Play a new game:
     setGame((prev) => ({ ...prev, isPlayAgain: true }));
     setIsActive(Array(INT_CHOICES).fill(true).fill(false, 1));
     setActiveColor(null);
-  }, []);
+  };
 
   let rowElements = [];
   for (let i = 0; i < INT_CHOICES; i++) {
